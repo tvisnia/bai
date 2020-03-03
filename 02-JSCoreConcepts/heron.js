@@ -1,11 +1,18 @@
 // boki trójkąta
-//a = 3;
-b = 4;
-c = 5;
-h = 7
+let a = 3;
+let b = 4;
+let c = 5;
+let h = 7
 
 // Pole trókąta o bokach ..., ... oraz ... wynosi ... .
+const p = (a, b, c) => (a + b + c) / 2
 
-let a = () => "aaaa";
+const withHeron = (a, b, c) => {
+    const halfCircuit = p(a, b, c)
+    return Math.sqrt(halfCircuit * (halfCircuit - a) * (halfCircuit - b) * (halfCircuit - c))
+}
 
-console.log( a() );
+const print = () =>
+    `Pole trójkąta o bokach ${a}, ${b} oraz ${c} wynosi ${withHeron(a, b, c)}`;
+
+console.log(print());

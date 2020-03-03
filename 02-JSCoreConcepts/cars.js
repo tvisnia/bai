@@ -1,5 +1,7 @@
 function isCar(car1, car2, car3) {
-    // return 
+    const arr = Array.of(car1, car2, car3)
+    const trueCount = arr.filter(car => car === true).length
+    return trueCount === 0 || trueCount === 3
 }
 
 console.log(isCar(true, true, true));
