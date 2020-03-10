@@ -10,18 +10,26 @@
     <h1>Shopping List</h1>
     <p>
         New item: <input type="text" name="item">
-        <button type="button">Add</button>
+        <button type="button" onclick="addNewItem()">Add</button>
     </p>
     <h3>List of items</h3>
-    <ol>
+    <ol id="ol">
         <li>cooking oil</li>
         <li>breakfast cereal</li>
         <li>bread</li>
     </ol>
 
     <script>
-    	// a JavaScript code here ...
+        const addNewItem = () => {
+            const itemName = document.getElementsByName('item')[0].value
 
+            if (itemName) {
+                const newItem = document.createElement("li");
+                newItem.innerText = itemName
+                const ol = document.getElementById('ol')
+                ol.appendChild(newItem)
+            }
+        }
     </script>
 </body>
 

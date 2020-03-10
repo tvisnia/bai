@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Typing test</title>
-		<meta charset="UTF-8">
-	</head>
-	<body>
-		<h1>How fast are your fingers?</h1>
-		<h3>You have 30 seconds. Just start typing...</h3>
-		<p>Nam strzelać nie kazano. - Wstąpiłem na działo<br>
+
+<head>
+	<title>Typing test</title>
+	<meta charset="UTF-8">
+</head>
+
+<body>
+
+
+	<h1>How fast are your fingers?</h1>
+	<h3>You have 30 seconds. Just start typing...</h3>
+	<p>Nam strzelać nie kazano. - Wstąpiłem na działo<br>
 		I spójrzałem na pole; dwieście armat grzmiało.<br>
 		Artyleryi ruskiej ciągną się szeregi,<br>
 		Prosto, długo, daleko, jako morza brzegi;<br>
@@ -19,13 +23,40 @@
 		Czarne chorągwie na śmierć prowadzą zastępy.<br>
 		Przeciw nim sterczy biała, wąska, zaostrzona,<br>
 		Jak głaz bodzący morze, reduta Ordona.</p>
-		
-		<textarea rows="15" cols="50"></textarea><br>
-		
-		<script>
-			// a JavaScript code here ...
-			
-		</script>
-		
-	</body>
+
+	<textarea rows="15" cols="50" id="area"></textarea><br>
+
+	<script>
+		const INTERVAL = 30 * 1000 // 30 seconds
+
+		const extractSubstr = (str, regexp) => {
+			return str.replace(/[^\w\s]|_/g, '')
+				.replace(/\s+/g, ' ')
+				.toLowerCase().match(regexp) || [];
+		}
+
+		const getWords = (str) => {
+			return extractSubstr(str, /\S+/g);
+		}
+
+		const onTimeout = () => {
+			const textArea = document.getElementsByTagName('textarea')[0]
+			const result = textArea.value
+			const resultField = document.createElement('p')
+			console.log(result.split(' ')
+				.filter(function (n) { return n != '' }))
+			const toPrint = `Słów : ${getWords
+				(result).length}
+			Znaków : ${result.length}`
+			resultField.innerText = toPrint
+			document.body.appendChild(resultField)
+		}
+
+		setTimeout(onTimeout, INTERVAL)
+
+
+	</script>
+
+</body>
+
 </html>

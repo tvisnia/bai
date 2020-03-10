@@ -12,7 +12,27 @@
 
     <script>
         // a JavaScript code here ...
+        const h1Text = document.getElementsByTagName('h1')[0].innerText
+        const textById = document.getElementById('someTest').innerText
+        const textByClass = document.getElementsByClassName('important')[0].innerText
+        const paragraphs = document.getElementsByTagName('p')
+        const textByTag = paragraphs[2].innerText
 
+        function print() {
+            console.log(h1Text)
+            console.log(textById)
+            console.log(textByClass)
+            console.log(textByTag)
+        }
+
+        function printParagraphs() {
+            for (p of paragraphs) {
+                console.log(p.innerText)
+            }
+        }
+
+        print()
+        printParagraphs()
     </script>
 </body>
 

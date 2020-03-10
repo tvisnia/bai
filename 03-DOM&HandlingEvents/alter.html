@@ -1,27 +1,61 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Pink Floyd</title>
-		<meta charset="UTF-8">
-	</head>
-	<body>
-		<h1>Another Brick in the Wall</h1>
-		<h3>Pink Floyd</h3>
-		<p>We don't need no education<br>
+
+<head>
+	<title>Pink Floyd</title>
+	<meta charset="UTF-8">
+</head>
+
+<body ondblclick="setYellowBackground(this)">
+	<h1 id="title" onclick="onTitleClick(this)">Another Brick in the Wall</h1>
+	<h3 onclick="onBandClick()">Pink Floyd</h3>
+	<p oncopy="alertOnCopy()" onclick="setLyricsItalics(this)" id='lyrics'>We don't need no education<br>
 		We don't need no thought control<br>
 		No dark sarcasm in the classroom<br>
 		Teachers leave them kids alone<br>
 		Hey! Teachers! Leave them kids alone<br>
 		All in all it's just another brick in the wall<br>
 		All in all you're just another brick in the wall</p>
-		
-		<p style="visibility: hidden;">Pink Floyd were an English rock band formed in London.<br>
+
+	<p style="visibility: hidden;" id='desc' onclick="onVisibleDescClick(this)">Pink Floyd were an English rock band
+		formed in London.<br>
 		They achieved international acclaim with their progressive<br>
 		and psychedelic music.</p>
-		
-		<script>
-			// a JavaScript code here ...
-			
-		</script>
-	</body>
+
+	<script>
+		const VISIBLE = "visible"
+
+		const onTitleClick = (element) => {
+			const inner = element.innerText
+			if (inner !== "Another Brick in the Wall (Part 2)")
+				element.innerText = inner + ' (Part 2)'
+		}
+
+		const onBandClick = () => {
+			document.getElementById('desc').style.visibility = VISIBLE
+		}
+
+		const setLyricsItalics = (element) => {
+			document.getElementById('lyrics').style.fontStyle = "italic"
+		}
+
+		const setYellowBackground = (body) => {
+			body.style.backgroundColor = 'yellow'
+		}
+
+		const alertOnCopy = () => {
+			alert('Copyrights.')
+		}
+
+		const onVisibleDescClick = (element) => {
+			if (element.style.visibility = VISIBLE) {
+				const newImg = document.createElement("img");
+				newImg.setAttribute('src', "https://upload.wikimedia.org/wikipedia/en/d/d6/Pink_Floyd_-_all_members.jpg")
+				document.body.appendChild(newImg)
+			}
+		}
+
+	</script>
+</body>
+
 </html>
