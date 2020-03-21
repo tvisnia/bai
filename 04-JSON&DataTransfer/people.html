@@ -1,22 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Student</title>
+    <title>Person</title>
     <meta charset="UTF-8" />
   </head>
   <body>
-    <h1>Student</h1>
-    <p>Open a console and then click the button</p>
-    <input type="button" value="Display student's data" onclick="getData()" />
-    <p id="personalData"></p>
-
     <script>
       var myData;
 
       function getData() {
         var method = "GET";
         var URL =
-          "https://gist.githubusercontent.com/tvisnia/a1a75143499cf459b1d0d99bdda7f1c9/raw/2dbe06e272c1475a079dfc61614fba5c14000152/id.json";
+          "https://gist.githubusercontent.com/tvisnia/b71b85dec7083c63890c602f81ee8cb7/raw/cfd79a95750c88b36e5d0fd3f62cc1ceef6015ca/people.json";
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = () => {
           if (xhr.status === 200 && xhr.readyState === 4) {
@@ -30,10 +25,18 @@
       }
 
       const display = () => {
-        let dataParagraph = document.getElementById("personalData");
-        dataParagraph.innerText = `Imię : ${myData.name}
-				Nazwisko: ${myData.surname}`;
+        let counter = 1;
+        myData.forEach(person => {
+          const p = document.createElement("p");
+          p.style.fontFamily = "Courier";
+          p.innerText = `${counter++}. ${
+            person.name
+          } ${person.surname.toUpperCase()}, ${person.country}`;
+          document.body.appendChild(p);
+        });
       };
+
+      getData();
     </script>
   </body>
 </html>

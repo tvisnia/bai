@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Kursy walut</title>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <h1>Aktualne kursy :</h1>
+    <h2>Euro :</h2>
+    <p id="eur"></p>
+    <h2>Dolar amerykański :</h2>
+    <p id="usd"></p>
+    <h2>Funt brytyjski :</h2>
+    <p id="gbp"></p>
+
+    <script>
+      const NBP_BASE = "http://api.nbp.pl/api/exchangerates/rates/c/";
+      const EUR_ENDPOINT = "eur/today/?format=json";
+      const USD_ENDPOINT = "usd/today/?format=json";
+      const GBP_ENDPOINT = "gbp/today/?format=json";
+
+      var eur;
+      var gbp;
+      var usd;
+
+      function getData(endpoint, callback) {
+        var method = "GET";
+        let URL = NBP_BASE + endpoint;
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = () => {
+          if (xhr.status === 200 && xhr.readyState === 4) {
+            callback(xhr.response);
+          }
+        };
+        xhr.open(method, URL);
+        xhr.send();
+      }
+
+      function toRates(bid, ask) {
+        return `Kupno : ${bid}  Sprzedaż : ${ask}`;
+      }
+
+      getData(EUR_ENDPOINT, response => {
+        eur = JSON.parse(response).rates;
+        document.getElementById("eur").innerText = toRates(
+          eur[0].bid,
+          eur[0].ask
+        );
+      });
+      getData(USD_ENDPOINT, response => {
+        usd = JSON.parse(response).rates;
+        document.getElementById("usd").innerText = toRates(
+          usd[0].bid,
+          usd[0].ask
+        );
+      });
+      getData(GBP_ENDPOINT, response => {
+        gbp = JSON.parse(response).rates;
+        document.getElementById("gbp").innerText = toRates(
+          gbp[0].bid,
+          gbp[0].ask
+        );
+      });
+    </script>
+  </body>
+</html>
