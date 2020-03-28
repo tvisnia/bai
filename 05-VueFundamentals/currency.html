@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <style>
+    td,
+    th {
+      border: 1px solid black;
+      width: 120px;
+    }
+  </style>
+  <body>
+    <div id="app">
+      <table cellspacing="0">
+        <tr>
+          <td v-for="name in columns"><b>{{capitaliseFirstLetter(name)}}</b></th>
+        </tr>
+        <tr v-for="rate in rates">
+          <td v-for="property in columns">{{rate[property]}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: '#app',
+        data: {
+          rates: [],
+          columns: [],
+          data: [],
+          endpoint: 'http://api.nbp.pl/api/exchangerates/tables/A/?format=json'
+        },
+        computed: {
+          getData: async function() {
+            const response = await fetch(this.endpoint);
+            const data = await response.json();
+            return data;
+          },
+          getColumns: async function() {
+            const rates = await this.getRates
+            const properties = Object.keys(rates[0]);
+            return properties;
+          },
+          getRates: async function() {
+            const json = await this.getData;
+            return json[0].rates;
+          }
+        },
+        methods: {
+          capitaliseFirstLetter: function(text) {
+            return text.charAt(0).toUpperCase() + text.substring(1);
+          }
+        },
+        async created() {
+          this.data = await this.getData;
+          this.columns = await this.getColumns;
+          this.rates = await this.getRates;
+        }
+      });
+    </script>
+  </body>
+</html>

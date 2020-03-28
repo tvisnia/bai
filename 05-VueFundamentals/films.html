@@ -1,42 +1,78 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-</head>
-<body>
-  <script>
-    var app = new Vue({
-      el: '#app',
-      data: {
-        films: [
-          {
-            title: 'Avatar',
-            year: 2009,
-            director: 'James Cameron',
-            budget: 237000000
+  </head>
+  <style>
+    td,
+    th {
+      border: 1px solid black;
+      width: 120px;
+    }
+  </style>
+  <body>
+    <div id="app">
+      <table cellspacing="0">
+        <tr>
+          <th v-for="name in columns">{{capitaliseFirstLetter(name)}}</th>
+        </tr>
+        <tr v-for="film in films">
+          <td v-for="property in columns">{{getValue(film, property)}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: '#app',
+        data: {
+          films: [
+            {
+              title: 'Avatar',
+              year: 2009,
+              director: 'James Cameron',
+              budget: 237000000
+            },
+            {
+              title: 'Pulp Fiction',
+              year: 1994,
+              director: 'Quentin Tarantino',
+              budget: 8000000
+            },
+            {
+              title: 'Pitch Black',
+              year: 2000,
+              director: 'David Twohy',
+              budget: 23000000
+            },
+            {
+              title: 'War and Peace',
+              year: 1956,
+              director: 'King Vidor',
+              budget: 6000000
+            }
+          ]
+        },
+        computed: {
+          titles: function() {
+            return this.films.map(film => {
+              return film.title;
+            });
           },
-          {
-            title: 'Pulp Fiction',
-            year: 1994,
-            director: 'Quentin Tarantino',
-            budget: 8000000
-          },
-          {
-            title: 'Pitch Black',
-            year: 2000,
-            director: 'David Twohy',
-            budget: 23000000
-          },
-          {
-            title: 'War and Peace',
-            year: 1956,
-            director: 'King Vidor',
-            budget: 6000000
+          columns: function() {
+            return Object.keys(this.films[0]);
           }
-        ] 
+        },
+        methods: {
+          capitaliseFirstLetter: function(text) {
+            return text.charAt(0).toUpperCase() + text.substring(1);
+          },
+          getValue: function(film, property) {
+            const value = film[property];
+            return property === 'budget' ? '$ ' + value : value;
+          }
         }
-      }
-    });
-  </script>
-</body>
+      });
+    </script>
+  </body>
 </html>

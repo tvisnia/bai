@@ -1,22 +1,43 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-</head>
-<body>
-  <script>
-    var app = new Vue({
-      el: '#app',
-      data: {
-        name1: 'Adam',
-        name2: 'Jan',
-        surname: 'Majewski',
-        foreigner: false,
-        nationality: 'Polish',
-        pesel: '92021708229',
-        address: 'ul. Szeroka 3, Kraków',
-    });
-  </script>
+  </head>
+  <body>
+    <div id="app">
+      <b>EMPLOYEE RECORD</b>
+      <div>Name 1: {{name1}}</div>
+      <div v-show="name2">Name 2: {{name2}}</div>
+      <div>Surname: {{surname}}</div>
+      <div v-if='nationality === "Polish"'>Pesel: {{pesel}}</div>
+      <div v-else>Nationality: {{nationality}}</div>
+      <div>Address: {{address}}</div>
+    </div>
 
-</body>
+    <script>
+      var Pole = new Vue({
+        el: '#app', // comment this line to check program working for John Brown
+        data: {
+          name1: 'Adam',
+          name2: 'Jan',
+          surname: 'Majewski',
+          foreigner: false,
+          nationality: 'Polish',
+          pesel: '92021708229',
+          address: 'ul. Szeroka 3, Kraków'
+        }
+      });
+
+      var American = new Vue({
+        el: "#app",
+        data: {
+          name1: "John",
+          surname: "Brown",
+          nationality: "USA",
+          address: "Holland Drive 4, Chicago"
+
+        }
+      })
+    </script>
+  </body>
 </html>

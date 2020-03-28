@@ -1,37 +1,93 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-</head>
-<body>
-  <script>
-    var app = new Vue({
-      el: '#app',
-      data: {
-        films: [
-          {
-            language: 'Python',
-            popularity: 25.95
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+  </head>
+  <body>
+    <canvas id="myChart" width="400" height="100"></canvas>
+    <script>
+      var app = new Vue({
+        el: '#myChart',
+        data: {
+          languages: [
+            {
+              language: 'Python',
+              popularity: 25.95
+            },
+            {
+              language: 'Java',
+              popularity: 21.42
+            },
+            {
+              language: 'JavaScript',
+              popularity: 8.26
+            },
+            {
+              language: 'C#',
+              popularity: 7.62
+            },
+            {
+              language: 'Php',
+              popularity: 7.37
+            }
+          ]
+        },
+        computed: {
+          labels: function() {
+            return this.languages.map(data => {
+              return data.language;
+            });
           },
-          {
-            language: 'Java',
-            popularity: 21.42
+          popularity: function() {
+            return this.languages.map(data => {
+              return data.popularity;
+            });
           },
-          {
-            language: 'JavaScript',
-            popularity: 8.26
-          },
-          {
-            language: 'C#',
-            popularity: 7.62
-          },
-          {
-            language: 'Php',
-            popularity: 7.37
+          chartData: function() {
+            return {
+              type: 'line',
+              data: {
+                labels: this.labels,
+                datasets: [
+                  {
+                    label: 'Stopień popularności',
+                    data: this.popularity,
+                    backgroundColor: ['rgba(54, 162, 235, 0.2)'],
+                    borderColor: ['rgba(54, 162, 235, 1)'],
+                    borderWidth: 2
+                  }
+                ]
+              },
+              options: {
+                scales: {
+                  yAxes: [
+                    {
+                      ticks: {
+                        beginAtZero: true
+                      }
+                    }
+                  ]
+                }
+              }
+            };
           }
-        ] 
-      }
-    });
-  </script>
-</body>
+        },
+        methods: {
+          createChart(chartId, chartData) {
+            const context = document.getElementById('myChart').getContext('2d');
+            console.log(this.chartData.type);
+            const myChart = new Chart(context, {
+              type: this.chartData.type,
+              data: this.chartData.data,
+              options: this.chartData.options
+            });
+          }
+        },
+        mounted() {
+          this.createChart('myChart', this.chartData);
+        }
+      });
+    </script>
+  </body>
 </html>

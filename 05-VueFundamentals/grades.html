@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <h1>Grades</h1>
+    <div id="app">
+     <div> Student's grades: 
+      <span v-for="grade in grades">{{grade + " "}}</span>
+    </div>
+    <div>
+        Average grade: {{avgTruncated}}
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: '#app',
+        data: {
+          grades: [4, 5, 3, 2, 3, 5, 5, 2, 4]
+        },
+        computed: {
+          gradesAvg: function() {
+            const arr = this.grades;
+            return parseFloat(arr.reduce((a, b) => a + b, 0) / arr.length);
+          },
+          avgTruncated: function() {
+            var re = new RegExp('^-?\\d+(?:\.\\d{0,' + (2 || -1) + '})?');
+            return this.gradesAvg.toString().match(re)[0];
+          },
+        }
+      });
+    </script>
+  </body>
+</html>

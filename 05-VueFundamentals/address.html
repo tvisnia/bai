@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
+
 <body>
-  <h1>Address</h1>    
+    <h1>Address</h1>
+    <div id="app">
+        {{ name }} {{surname}} <br /> {{address}} <br /> {{postcode}} {{city}}
+    </div>
 
-  <script>
-    var app = new Vue({
-      el: '#app',
-      data: {
-        name: 'Adam',
-        surname: 'Kownacki',
-        address: 'ul. Beskidzka 38',
-        postcode: '23-908',
-        city: 'Stalowa Wola'
-      }
-    });
-  </script>
-
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                name: "Adam",
+                surname: "Kownacki",
+                address: "ul. Beskidzka 38",
+                postcode: "23-908",
+                city: "Stalowa Wola"
+            }
+        });
+    </script>
 </body>
+
 </html>
