@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      Lista przedmiotów do wyboru :
+      <br />
+      <br />
+      <div v-for="course in courses" :key="course.name">
+        <input type="checkbox" :id="value" v-model="course.selected" />
+        <label :for="course">{{ course.name }}</label>
+      </div>
+      <br />
+      Zaznaczono: {{selectedCount}}
+    </div>
+    <script>
+      var app = new Vue({
+        el: '#app',
+        data: {
+          courses: [
+            { name: 'Matematyka komputerowa', selected: false },
+            { name: 'Etyka biznesu', selected: false },
+            { name: 'Etykieta menedżera', selected: false },
+            { name: 'Bezpieczeństwo IoT', selected: false },
+            {
+              name: 'Sposoby przeciwdziałania dehumanizacji pracy zdalnej',
+              selected: false,
+            },
+          ],
+        },
+        computed: {
+          selectedCount: function () {
+            return this.courses.filter((c) => c.selected).length;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

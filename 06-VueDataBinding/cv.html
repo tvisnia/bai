@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h1>Formularz CV</h1>
+    <input type="text" v-model="cv.name"> 
+    <label for="text">Imię</label> </br>
+    <input type="text" v-model="cv.surname">
+    <label for="text">Nazwisko</label> </br>
+    <input type="text" v-model.number="cv.age">
+    <label for="text">Wiek</label> </br>
+    <select v-model="cv.sex">
+        <option v-for="option in sexes" v-bind:value="option">
+          {{ option }}
+        </option>
+      </select> 
+    <label for="text">Płeć</label> </br>
+    <label for="text">Umiejętności</label> </br>
+        <input type="checkbox" :id="cs" v-model="cv.skillset.computerSkills" />
+        <label >{{ skills[0] }}</label></br>
+        <input type="checkbox" :id="dl" v-model="cv.skillset.drivingLicense" />
+        <label >{{ skills[1] }}</label></br>
+        <input type="checkbox" :id="cr" v-model="cv.skillset.creativity" />
+        <label >{{ skills[2] }}</label></br>
+        <input type="checkbox" :id="tw" v-model="cv.skillset.teamWork" />
+        <label >{{ skills[3] }}</label></br>
+    <select v-model="cv.education">
+        <option v-for="option in educations" v-bind:value="option">
+          {{ option }}
+        </option>
+      </select> 
+    <label for="text">Wykształcenie</label> </br></br>
+    <button v-on:click="onSave">Zapisz trwale</button>
+    <button v-on:click="onRead">Odczytaj zapisane dane (konsola)</button>
+  </div>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        cv: {
+            name: '',
+            surname: '',
+            age: 0,
+            sex: '',
+            skillset: {
+                computerSkills: true,
+                drivingLicense: true,
+                creativity: true,
+                teamWork: true
+            },
+            education: '',
+        },
+        sexes: ["Mężczyzna", "Kobieta"],
+        educations: ["brak", "podstawowe", "średnie", "wyższe"],
+        skills: ["Obsługa komputera", "Prawo jazdy", "Kreatywność", "Praca w zespole"]
+      },
+      methods: {
+        onSave: function() {
+            localStorage.setItem('cv', JSON.stringify(this.cv) )
+        },
+        onRead: function() {
+            const savedCv = localStorage.getItem('cv')
+            savedCv && console.log(JSON.parse(savedCv))
+        }
+      }
+    });
+  </script>
+</body>
+</html>

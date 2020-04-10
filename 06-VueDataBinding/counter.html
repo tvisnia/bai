@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <button v-on:click="clicks++">{{clicks}}</button>
+    </div>
+    <script>
+      var app = new Vue({
+        el: '#app',
+        data: {
+          clicks: 0,
+        },
+        methods: {
+          onSave: function () {
+            console.log(
+              `Tytuł książki : ${this.bookName}, nazwisko autora: ${this.authorSurname}`
+            );
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
