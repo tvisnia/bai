@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Tangerine"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="app" class="main">
+      <p class="title">Najnowsze dane globalne o koronawirusie</p>
+      <virus-data-card :data="globalData"></virus-data-card>
+    </div>
+
+    <script type="text/x-template" id="vd-template">
+      <div id="app" class="main">
+          <div class="global">
+            <h3>W skali światowej</h3>
+            <p>Nowe przypadki : {{data.NewConfirmed}}</p>
+            <p>Wszystkie prypadki : {{data.TotalConfirmed}}</p>
+            <p>Nowe zgony : {{data.NewDeaths}}</p>
+            <p>Wszystkie zgony : {{data.TotalDeaths}}</p>
+            <p>Nowe wyzdrowienia : {{data.NewRecovered}}</p>
+            <p>Wszystkie wyzdrowienia : {{data.TotalRecovered}}</p>
+          </div>
+        </div>
+    </script>
+
+    <script src="ApiScript.js"></script>
+  </body>
+</html>
+
+<style>
+  .main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    height: '100%';
+    width: '100%';
+  }
+  .global {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 350px;
+    height: 350px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: white;
+    -webkit-box-shadow: 0px 0px 21px -4px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 21px -4px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 21px -4px rgba(0, 0, 0, 0.75);
+  }
+
+  .title {
+    font-size: 45px;
+    margin: 7px;
+    font-family: 'Tangerine';
+    text-shadow: 14px 14px 14px #aaa;
+  }
+</style>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Tangerine"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app" class="main">
+      <binary-card :decimal="8"></binary-card>
+      <binary-card :decimal="170"></binary-card>
+      <binary-card :decimal="204"></binary-card>
+      <binary-card :decimal="3855"></binary-card>
+    </div>
+
+    <script type="text/x-template" id="bc-template">
+      <div class="binaryCard">
+          <p class="title">{{title}}</p>
+          <p>{{decimal}}(10) = {{binary}}(2)</p>
+      </div>
+    </script>
+
+    <script src="BinaryScript.js"></script>
+  </body>
+</html>
+
+<style>
+  .main {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    overflow-y: scroll;
+  }
+  .binaryCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 300px;
+    height: 100px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(190, 226, 224);
+    -webkit-box-shadow: 0px 0px 21px -4px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 21px -4px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 21px -4px rgba(0, 0, 0, 0.75);
+  }
+
+  .title {
+    font-size: 45px;
+    margin: 7px;
+    font-family: 'Tangerine';
+    text-shadow: 14px 14px 14px #aaa;
+  }
+</style>
